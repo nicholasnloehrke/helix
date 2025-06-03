@@ -27,7 +27,7 @@ use std::{
     borrow::Cow,
     cell::Cell,
     collections::{BTreeMap, HashMap, HashSet},
-    fs,
+    env, fs,
     io::{self, stdin},
     num::NonZeroUsize,
     path::{Path, PathBuf},
@@ -618,6 +618,9 @@ pub enum StatusLineElement {
 
     /// Indicator for selected register
     Register,
+
+    /// NL: Remove after debugging
+    DebugViewID,
 }
 
 // Cursor shape is read and used on every rendered frame and so needs
@@ -1947,6 +1950,9 @@ impl Editor {
 
     pub fn focus(&mut self, view_id: ViewId) {
         let prev_id = std::mem::replace(&mut self.tree.focus, view_id);
+        let curr_id = self.tree.focus;
+        log::info!("id={:?}", curr_id);
+        env::set_var("HELIX_FOCUS_ID", format!("{:?}", curr_id));
 
         // if leaving the view: mode should reset and the cursor should be
         // within view
@@ -1981,7 +1987,9 @@ impl Editor {
     pub fn focus_direction(&mut self, direction: tree::Direction) {
         let current_view = self.tree.focus;
         if let Some(id) = self.tree.find_split_in_direction(current_view, direction) {
-            self.focus(id)
+            self.focus(id);
+        } else {
+            log::info!("We should forward to tmux!");
         }
     }
 
