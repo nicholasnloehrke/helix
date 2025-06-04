@@ -25,6 +25,7 @@ mod prompt;
 mod signature_help;
 mod snippet;
 mod workspace_trust;
+mod tmux;
 
 pub fn setup(config: Arc<ArcSwap<Config>>) -> Handlers {
     events::register();
@@ -56,6 +57,7 @@ pub fn setup(config: Arc<ArcSwap<Config>>) -> Handlers {
     auto_save::register_hooks(&handlers);
     diagnostics::register_hooks(&handlers);
     snippet::register_hooks(&handlers);
+    tmux::register_hooks(&handlers);
     document_colors::register_hooks(&handlers);
     document_links::register_hooks(&handlers);
     prompt::register_hooks(&handlers);

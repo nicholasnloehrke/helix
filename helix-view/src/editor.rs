@@ -4,7 +4,7 @@ use crate::{
     document::{
         DocumentOpenError, DocumentSavedEventFuture, DocumentSavedEventResult, Mode, SavePoint,
     },
-    events::{DocumentDidClose, DocumentDidOpen, DocumentFocusLost},
+    events::{DocumentDidClose, DocumentDidOpen, DocumentFocusLost, EditorFocusDirectionFailed},
     graphics::{CursorKind, Rect},
     handlers::Handlers,
     info::Info,
@@ -2224,7 +2224,12 @@ impl Editor {
     pub fn focus_direction(&mut self, direction: tree::Direction) {
         let current_view = self.tree.focus;
         if let Some(id) = self.tree.find_split_in_direction(current_view, direction) {
-            self.focus(id)
+            self.focus(id);
+        } else {
+            dispatch(EditorFocusDirectionFailed {
+                editor: self,
+                direction,
+            });
         }
     }
 
