@@ -2,7 +2,7 @@ use helix_core::{ChangeSet, Rope};
 use helix_event::events;
 use helix_lsp::LanguageServerId;
 
-use crate::{Document, DocumentId, Editor, ViewId};
+use crate::{Document, DocumentId, Editor, ViewId, tree::Direction};
 
 events! {
     DocumentDidOpen<'a> {
@@ -32,5 +32,9 @@ events! {
     LanguageServerExited<'a> {
         editor: &'a mut Editor,
         server_id: LanguageServerId
+    }
+    EditorFocusDirectionFailed<'a> {
+        editor: &'a mut Editor,
+        direction: Direction
     }
 }
