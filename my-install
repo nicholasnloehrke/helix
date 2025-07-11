@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo building
+cargo install --path helix-term --locked
+
+echo making symlinks
+ln -Tsf $PWD/runtime ~/.config/helix/runtime
