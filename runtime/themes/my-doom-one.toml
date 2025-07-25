@@ -107,13 +107,14 @@
 "ui.menu.selected" = { fg = "cyan", bg = "bg_highlight" }
 
 # Additional overrides
-"ui.virtual.whitespace" = "grey"
+"ui.virtual.whitespace" = "whitespace"
 "ui.virtual.indent-guide" = { fg = "grey" }
 
 [palette]
 bg = "#282C34"
 fg = "#BBC2CF" 
 grey = "#5B6268"
+whitespace = "#44494E" # A slightly darker 'grey'
 blue = "#51AFEF"
 green = "#98BE65"
 cyan = "#46D9FF" 
