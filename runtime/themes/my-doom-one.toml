@@ -108,7 +108,7 @@
 
 # Additional overrides
 "ui.virtual.whitespace" = "whitespace"
-"ui.virtual.indent-guide" = { fg = "grey" }
+"ui.virtual.indent-guide" = { fg = "whitespace" }
 
 [palette]
 bg = "#282C34"
